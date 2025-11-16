@@ -1,31 +1,27 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Courses from "./pages/Courses";
 import Contact from "./pages/Contact";
+import Footer from "./components/Footer";
 
-function App() {
+const App = () => {
   return (
-    <Router>
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
 
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </main>
+      <main className="grow">
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/courses" element={<Courses />}></Route>
+          <Route path="/contact" element={<Contact />}></Route>
+        </Routes>
+      </main>
 
-        <Footer />
-      </div>
-    </Router>
+      <Footer />
+    </div>
   );
-}
-
+};
 export default App;
