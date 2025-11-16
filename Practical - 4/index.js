@@ -2,17 +2,17 @@ const fs = require("fs").promises;
 
 async function writeToFile(filename, content) {
   await fs.writeFile(filename, content);
-  console.log(`Successfully wrote to ${filename}`);
+  console.log(`\nSuccessfully wrote to ${filename}`);
 }
 
 async function appendToFile(filename, content) {
   await fs.appendFile(filename, content);
-  console.log(`Successfully appended to ${filename}`);
+  console.log(`\nSuccessfully appended to ${filename}`);
 }
 
 async function readFromFile(filename) {
   const data = await fs.readFile(filename, "utf8");
-  console.log(`Content of ${filename}:`);
+  console.log(`\nContent of ${filename}`);
   console.log(data);
 }
 
@@ -22,4 +22,4 @@ async function main() {
   await readFromFile("example.txt");
 }
 
-main().catch((err) => console.error("Error:", err));
+main().catch((err) => console.error("Error: ", err));

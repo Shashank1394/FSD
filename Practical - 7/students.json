@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Rohan",
+    "roll": 1,
+    "marks": 85
+  },
+  {
+    "name": "Priya",
+    "roll": 2,
+    "marks": 72
+  },
+  {
+    "name": "Aman",
+    "roll": 3,
+    "marks": 40
+  }
+]

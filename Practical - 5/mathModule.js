@@ -6,7 +6,7 @@ function multiply(a, b) {
   return a * b;
 }
 
-module.exports = {
+export default {
   add,
   multiply,
 };
