@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Bill Calculator</title>
+	</head>
+
+	<body>
+		<section>
+			<h1>Bill Calculator (with 18% GST)</h1>
+		</section>
+
+		<section>
+			<label for="prices">Enter product prices (comma-separated)</label>
+			<input type="text" name="prices" id="prices" required />
+			<button type="submit">Calculate Total</button>
+			<h2></h2>
+		</section>
+
+		<script>
+			const pricesInput = document.querySelector("#prices");
+			const btn = document.querySelector("button");
+
+			const calculateTotalWithGST = (...prices) => {
+				let total = 0;
+				prices.forEach((price) => {
+					total += price * 1.18;
+				});
+				return +total.toFixed(2);
+			};
+
+			btn.addEventListener("click", () => {
+				const pricesArray = pricesInput.value
+					.split(",")
+					.map((item) => item.trim())
+					.filter((item) => item !== "")
+					.map(Number);
+
+				const allValid = pricesArray.every(
+					(price) => !isNaN(price) && price >= 0
+				);
+				if (!allValid || !prices.value) {
+					alert("Please enter valid positive numbers separated by commas.");
+					return;
+				} else {
+					const totalBill = calculateTotalWithGST(...pricesArray);
+					const body = document.querySelector("body");
+					const result = document.querySelector("h2");
+					pricesInput.value = "";
+					result.textContent = `Total Bill (with 18% GST): ${totalBill}`;
+				}
+			});
+		</script>
+	</body>
+</html>

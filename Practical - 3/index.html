@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Student Pass Filter</title>
+    <style>
+      body {
+        background-color: #1e1e1e;
+        font-family: "Segoe UI", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        background: #fff;
+        padding: 25px 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        width: 450px;
+      }
+      h1 {
+        margin-bottom: 20px;
+        color: #333;
+      }
+      input {
+        padding: 10px;
+        margin: 5px;
+        width: 110px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        transition: 0.2s;
+      }
+      input:focus {
+        border-color: dodgerblue;
+        box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+      }
+      button {
+        padding: 10px 15px;
+        margin: 5px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.2s;
+      }
+      .add-btn {
+        background-color: dodgerblue;
+        color: white;
+      }
+      .add-btn:hover {
+        background-color: royalblue;
+      }
+      .pass-btn {
+        background-color: #4caf50;
+        color: white;
+      }
+      .pass-btn:hover {
+        background-color: #3e8e41;
+      }
+      .fail-btn {
+        background-color: #f44336;
+        color: white;
+      }
+      .fail-btn:hover {
+        background-color: #d32f2f;
+      }
+      h2 {
+        margin-top: 20px;
+        color: #444;
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+      }
+      .list {
+        margin-top: 10px;
+        color: #555;
+        min-height: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Student Pass Filter</h1>
+      <input type="text" id="name" placeholder="Enter Name" />
+      <input type="number" id="rollNo" placeholder="Enter Roll No" />
+      <input type="number" id="marks" placeholder="Enter Marks" />
+      <button class="add-btn" onclick="addStudent()">Add Student</button>
+
+      <h2>All Students</h2>
+      <div id="allStudents" class="list">No students added yet.</div>
+
+      <button class="pass-btn" onclick="showPassed()">
+        Show Passed Students
+      </button>
+      <button class="fail-btn" onclick="showFailed()">
+        Show Failed Students
+      </button>
+
+      <h2>Passed Students</h2>
+      <div id="passedStudents" class="list"></div>
+
+      <h2>Failed Students</h2>
+      <div id="failedStudents" class="list"></div>
+    </div>
+
+    <script>
+      class Student {
+        constructor(name, rollNo, marks) {
+          this.name = name;
+          this.rollNo = rollNo;
+          this.marks = marks;
+        }
+        isPassed() {
+          return this.marks > 40;
+        }
+      }
+
+      let students = [];
+
+      function addStudent() {
+        let name = document.getElementById("name").value.trim();
+        let rollNo = document.getElementById("rollNo").value.trim();
+        let marks = parseInt(document.getElementById("marks").value);
+
+        if (name && rollNo && !isNaN(marks)) {
+          students.push(new Student(name, rollNo, marks));
+          document.getElementById("name").value = "";
+          document.getElementById("rollNo").value = "";
+          document.getElementById("marks").value = "";
+          displayAllStudents();
+        } else {
+          alert("Please fill all fields correctly!");
+        }
+      }
+
+      function displayAllStudents() {
+        let output = students
+          .map((s) => `${s.rollNo} - ${s.name} (${s.marks})`)
+          .join("<br>");
+        document.getElementById("allStudents").innerHTML =
+          output || "No students added yet.";
+      }
+
+      function showPassed() {
+        let passed = students.filter((s) => s.isPassed());
+        let output = passed
+          .map((s) => `${s.rollNo} - ${s.name} (${s.marks})`)
+          .join("<br>");
+        document.getElementById("passedStudents").innerHTML =
+          output || "No passed students.";
+      }
+
+      function showFailed() {
+        let failed = students.filter((s) => !s.isPassed());
+        let output = failed
+          .map((s) => `${s.rollNo} - ${s.name} (${s.marks})`)
+          .join("<br>");
+        document.getElementById("failedStudents").innerHTML =
+          output || "No failed students.";
+      }
+    </script>
+  </body>
+</html>
